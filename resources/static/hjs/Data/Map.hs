@@ -1,16 +1,17 @@
 module Data.Map where
-  
-type Map k v = [(k,v)]
 
-empty :: Map k v
-empty = []
+type Map k a = [(k, a)]
 
-lookup :: Eq k => k -> Map k v -> Maybe v
-lookup _ [] = Nothing
-lookup k ((k', v):xs) | k == k'   = Just v
-                      | otherwise = lookup k xs
+lookup :: Eq k => k -> Map k a -> Maybe a
+lookup _ []            = Nothing
+lookup k ((k', a):xs)  | k == k'    = Just a
+                       | otherwise  = lookup k xs
 
-insert :: k -> v -> Map k v -> Map k v
-insert k v = (:) (k,v)
+insert :: k -> a -> Map k a -> Map k a
+insert k a = (:) (k, a)
 
+assocs :: Map k a -> [(k, a)]
 assocs = id
+
+empty :: Map k a
+empty = []
