@@ -40,7 +40,7 @@ jsRule2Rule ptr = do id   <- getAttr "id"   ptr
 
 proofTreeNode = Node "" "" [] ""
 
-foreign import jscript "%1.rule"
+foreign import js "%1.rule"
   getRule :: JSRule -> JSString
   
 hasValidTermSyntax :: String -> Bool

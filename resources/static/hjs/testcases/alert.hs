@@ -5,7 +5,7 @@ import Language.UHC.JScript.Types (fromJS)
 
 import Language.UHC.JScript.ECMA.String (JSString)
 
-foreign import jscript "window.location.href"
+foreign import js "window.location.href"
   windowHref :: JSString
 
 main :: IO ()

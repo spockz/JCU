@@ -17,5 +17,5 @@ doCheck obj = do (proof, rules) <- getAttr "data" obj
                  self <- getSelf
                  postMessage self $ checkProof rules proof
 
-foreign import jscript "JSON.parse(%1)"
+foreign import js "JSON.parse(%1)"
   jsonParse :: JSString -> IO a

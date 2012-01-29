@@ -212,9 +212,13 @@ replaceRuleTree p = do
   -- Draw the new ruleTree
   replaceWith oldUL newUL
   
-  case status of
-    (Node Correct _) -> showInfo "Congratulations! You have successfully completed your proof!"
+  case complete status of
+    True -> showInfo "Congratulations! You have successfully completed your proof!"
     _                -> return ()
+  where complete :: PCheck -> Bool
+        complete (Node Correct []) = True
+        complete (Node Correct xs) = all complete xs
+        complete _                 = False
 
 
 addRules :: AjaxCallback (JSArray JSRule)
@@ -295,7 +299,7 @@ checkProof p = do rules  <- jQuery ".rule-list-item" >>= jQueryToArray
 --  where f x =    getAttr "innerText" x 
 --            >>=  return . fromJust . tryParseRule . (fromJS :: JSString -> String)                      
 
--- foreign import jscript "_deepe_"
+-- foreign import js "_deepe_"
 --   deepE :: a -> IO a
                     
 doSubst :: Proof -> EventHandler
